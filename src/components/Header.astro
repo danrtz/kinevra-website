@@ -10,18 +10,20 @@ import { COMPANY_NAME } from '../consts';
         <span class="logo-text gradient-text">{COMPANY_NAME}</span>
       </a>
       
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <HeaderLink href="/">Home</HeaderLink>
-        <HeaderLink href="#services">Services</HeaderLink>
+        <HeaderLink href="/#services">Services</HeaderLink>
         <HeaderLink href="/about">About</HeaderLink>
-        <HeaderLink href="#contact">Contact</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+        <HeaderLink href="/#contact">Contact</HeaderLink>
+        <a href="mailto:daniel@kinevra.com" class="btn btn-primary btn-sm mobile-cta">Get Started</a>
       </div>
       
-      <div class="nav-cta">
+      <div class="nav-cta desktop-only">
         <a href="mailto:daniel@kinevra.com" class="btn btn-primary btn-sm">Get Started</a>
       </div>
       
-      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
         <span></span>
@@ -61,7 +63,7 @@ import { COMPANY_NAME } from '../consts';
     display: flex;
     align-items: center;
     text-decoration: none;
-    z-index: 2;
+    z-index: 1002;
   }
 
   .logo-text {
@@ -100,6 +102,10 @@ import { COMPANY_NAME } from '../consts';
     font-size: 0.875rem;
   }
 
+  .mobile-cta {
+    display: none;
+  }
+
   .mobile-menu-toggle {
     display: none;
     flex-direction: column;
@@ -108,7 +114,8 @@ import { COMPANY_NAME } from '../consts';
     border: none;
     cursor: pointer;
     padding: 8px;
-    z-index: 2;
+    z-index: 1002;
+    position: relative;
   }
 
   .mobile-menu-toggle span {
@@ -119,9 +126,53 @@ import { COMPANY_NAME } from '../consts';
     border-radius: 2px;
   }
 
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
   @media (max-width: 768px) {
-    .nav-links,
-    .nav-cta {
+    .nav-links {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 1001;
+    }
+
+    .nav-links.active {
+      transform: translateX(0);
+    }
+
+    .nav-links :global(a) {
+      font-size: 1.25rem;
+      padding: 12px 24px;
+      width: 80%;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .mobile-cta {
+      display: inline-block !important;
+      margin-top: 20px;
+    }
+
+    .desktop-only {
       display: none;
     }
 
@@ -132,7 +183,27 @@ import { COMPANY_NAME } from '../consts';
 </style>
 
 <script>
-  // Add scroll effect
+  // Mobile menu toggle
+  const mobileToggle = document.getElementById('mobileToggle');
+  const navLinks = document.getElementById('navLinks');
+  
+  mobileToggle?.addEventListener('click', () => {
+    mobileToggle.classList.toggle('active');
+    navLinks?.classList.toggle('active');
+    document.body.style.overflow = navLinks?.classList.contains('active') ? 'hidden' : '';
+  });
+
+  // Close mobile menu when clicking a link
+  const links = navLinks?.querySelectorAll('a');
+  links?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileToggle?.classList.remove('active');
+      navLinks?.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Scroll effect
   let lastScroll = 0;
   const header = document.querySelector('header');
   
@@ -141,10 +212,37 @@ import { COMPANY_NAME } from '../consts';
     
     if (currentScroll > 100) {
       header?.style.setProperty('background', 'rgba(0, 0, 0, 0.95)');
+      header?.style.setProperty('backdrop-filter', 'blur(30px)');
     } else {
       header?.style.setProperty('background', 'rgba(0, 0, 0, 0.8)');
+      header?.style.setProperty('backdrop-filter', 'blur(20px)');
     }
     
     lastScroll = currentScroll;
+  });
+
+  // Smooth scroll for anchor links
+  document.addEventListener('DOMContentLoaded', () => {
+    const anchorLinks = document.querySelectorAll('a[href^="#"], a[href^="/#"]');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && (href.startsWith('#') || href.startsWith('/#'))) {
+          const targetId = href.replace('/', '').substring(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            const headerHeight = 72;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+            // Update URL without page jump
+            history.pushState(null, '', href.replace('/', ''));
+          }
+        }
+      });
+    });
   });
 </script>
