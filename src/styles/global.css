@@ -1,4 +1,4 @@
-/* Apple System Fonts and Modern Variables */
+/* Apple System Fonts and Modern Variables with HDR Support */
 :root {
   --primary: #007AFF;
   --primary-dark: #0051D5;
@@ -22,6 +22,20 @@
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
   --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
   --max-width: 1440px;
+  
+  /* HDR Color Values for P3 Display Support */
+  --hdr-red: color(display-p3 1 0 0);
+  --hdr-blue: color(display-p3 0 0.5 1);
+  --hdr-purple: color(display-p3 0.5 0 1);
+}
+
+/* HDR Media Query for Wide Color Gamut Displays */
+@media (dynamic-range: high) {
+  :root {
+    --primary: color(display-p3 0 0.48 1);
+    --accent: color(display-p3 1 0.23 0.19);
+    --secondary: color(display-p3 0.35 0.34 0.84);
+  }
 }
 
 * {
@@ -155,18 +169,19 @@ a:hover {
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  border-radius: 12px;
-  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 100px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
   position: relative;
   overflow: hidden;
   z-index: 1;
-  transform: rotate(-0.5deg);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn:hover {
-  transform: rotate(0deg) scale(1.02);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .btn::before {

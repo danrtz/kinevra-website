@@ -6,74 +6,72 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <!-- Hero Section -->
   <section class="hero">
-    <div class="blur-bg blur-bg-1"></div>
-    <div class="blur-bg blur-bg-2"></div>
-    <div class="blur-bg blur-bg-3"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-glow"></div>
     
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge animate-slide-in">
-          <span class="badge-dot"></span>
-          <span>SAP BTP Specialists</span>
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-badge animate-slide-in">
+            <span class="badge-dot"></span>
+            <span>SAP BTP Specialists</span>
+          </div>
+          
+          <h1 class="hero-title animate-slide-up">
+            <span class="title-line">SAP Integration Done</span>
+            <span class="title-line gradient-text-hdr">Right</span>
+          </h1>
+          
+          <p class="hero-subtitle animate-slide-up" style="animation-delay: 0.1s;">
+            We handle the complex SAP stuff so you don't have to. From S/4HANA migrations to BTP development, 
+            we know the platform inside out.
+          </p>
+          
+          <div class="hero-actions animate-slide-up" style="animation-delay: 0.2s;">
+            <a href="mailto:daniel@kinevra.com" class="btn btn-primary btn-glow">Let's Talk</a>
+            <a href="#services" class="btn btn-outline">What We Do</a>
+          </div>
+          
+          <div class="hero-stats animate-slide-up" style="animation-delay: 0.3s;">
+            <div class="stat">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">CLOUD NATIVE</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">SUPPORT</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">∞</div>
+              <div class="stat-label">SCALABILITY</div>
+            </div>
+          </div>
         </div>
         
-        <h1 class="hero-title animate-slide-up">
-          SAP Integration <span class="gradient-text">Done Right</span>
-        </h1>
-        
-        <p class="hero-subtitle animate-slide-up" style="animation-delay: 0.1s;">
-          We handle the complex SAP stuff so you don't have to. From S/4HANA migrations to BTP development, 
-          we know the platform inside out.
-        </p>
-        
-        <div class="hero-actions animate-slide-up" style="animation-delay: 0.2s;">
-          <a href="#contact" class="btn btn-primary">Let's Talk</a>
-          <a href="#services" class="btn btn-outline">What We Do</a>
-        </div>
-        
-        <div class="hero-stats animate-slide-up" style="animation-delay: 0.3s;">
-          <div class="stat">
-            <div class="stat-number gradient-text">100%</div>
-            <div class="stat-label">Cloud Native</div>
+        <div class="hero-features">
+          <div class="feature-card glass-card animate-slide-in" style="animation-delay: 0.2s;">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-content">
+              <h3>Same Day Response</h3>
+              <p>Not weeks of emails</p>
+            </div>
           </div>
-          <div class="stat">
-            <div class="stat-number gradient-text">24/7</div>
-            <div class="stat-label">Support</div>
+          
+          <div class="feature-card glass-card animate-slide-in" style="animation-delay: 0.3s;">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-content">
+              <h3>SOC2 Compliant</h3>
+              <p>Your data stays yours</p>
+            </div>
           </div>
-          <div class="stat">
-            <div class="stat-number gradient-text">∞</div>
-            <div class="stat-label">Scalability</div>
+          
+          <div class="feature-card glass-card animate-slide-in" style="animation-delay: 0.4s;">
+            <div class="feature-icon">📈</div>
+            <div class="feature-content">
+              <h3>99.9% Uptime</h3>
+              <p>We monitor 24/7</p>
+            </div>
           </div>
-        </div>
-      </div>
-      
-      <div class="hero-visual">
-        <div class="floating-card animate-float">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </div>
-          <div class="card-title">Same Day Response</div>
-          <div class="card-desc">Not weeks of emails</div>
-        </div>
-        <div class="floating-card animate-float" style="animation-delay: 1.3s;">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-            </svg>
-          </div>
-          <div class="card-title">SOC2 Compliant</div>
-          <div class="card-desc">Your data stays yours</div>
-        </div>
-        <div class="floating-card animate-float" style="animation-delay: 2.1s;">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
-          </div>
-          <div class="card-title">99.9% Uptime</div>
-          <div class="card-desc">We monitor 24/7</div>
         </div>
       </div>
     </div>
@@ -251,7 +249,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     padding: 0;
   }
 
-  /* Hero Section */
+  /* Hero Section with HDR support */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -259,48 +257,140 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     position: relative;
     overflow: hidden;
     padding: 120px 0 80px;
-    background: radial-gradient(ellipse at top, rgba(0, 122, 255, 0.1), transparent 40%),
-                radial-gradient(ellipse at bottom right, rgba(88, 86, 214, 0.08), transparent 40%);
+    background: #000;
+  }
+
+  /* HDR Gradient Background */
+  .hero-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 30% 0%, 
+      color(display-p3 1 0 0 / 0.5) 0%, 
+      transparent 50%),
+      radial-gradient(ellipse at 80% 100%, 
+      color(display-p3 0.5 0 0.8 / 0.3) 0%, 
+      transparent 50%);
+    mix-blend-mode: screen;
+    animation: gradientShift 10s ease-in-out infinite;
+  }
+
+  /* Fallback for non-HDR displays */
+  @supports not (color: color(display-p3 1 0 0)) {
+    .hero-gradient {
+      background: radial-gradient(ellipse at 30% 0%, 
+        rgba(255, 0, 0, 0.5) 0%, 
+        transparent 50%),
+        radial-gradient(ellipse at 80% 100%, 
+        rgba(127, 0, 204, 0.3) 0%, 
+        transparent 50%);
+    }
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, 
+      rgba(255, 0, 0, 0.1) 0%, 
+      transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
   }
 
   .hero-content {
-    max-width: 800px;
-    margin-bottom: 60px;
+    max-width: 700px;
   }
 
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
-    background: var(--surface);
-    border: 1px solid var(--border);
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .badge-dot {
     width: 8px;
     height: 8px;
-    background: var(--success);
+    background: #00ff00;
     border-radius: 50%;
-    animation: glow 2s ease-in-out infinite;
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
   }
 
   .hero-title {
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: clamp(3.5rem, 10vw, 6rem);
     font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 24px;
+    line-height: 0.9;
+    margin-bottom: 32px;
     letter-spacing: -0.03em;
+  }
+
+  .title-line {
+    display: block;
+  }
+
+  /* HDR Gradient Text */
+  .gradient-text-hdr {
+    background: linear-gradient(135deg, 
+      color(display-p3 1 0.2 0.4) 0%,
+      color(display-p3 0.8 0 1) 50%,
+      color(display-p3 0.4 0.2 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: brightness(1.2) contrast(1.1);
+  }
+
+  /* Fallback gradient for non-HDR */
+  @supports not (color: color(display-p3 1 0 0)) {
+    .gradient-text-hdr {
+      background: linear-gradient(135deg, 
+        #ff3366 0%,
+        #cc00ff 50%,
+        #6633ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   }
 
   .hero-subtitle {
     font-size: 1.25rem;
     line-height: 1.6;
     margin-bottom: 40px;
-    max-width: 600px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
   }
 
   .hero-actions {
@@ -310,71 +400,114 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     margin-bottom: 60px;
   }
 
+  .btn-glow {
+    position: relative;
+    background: linear-gradient(135deg, #007AFF, #5856D6);
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+  }
+
+  .btn-glow::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #007AFF, #5856D6, #FF3B30);
+    border-radius: 100px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(10px);
+  }
+
+  .btn-glow:hover::before {
+    opacity: 1;
+  }
+
+  .btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 122, 255, 0.6);
+  }
+
   .hero-stats {
     display: flex;
-    gap: 48px;
-    padding-top: 40px;
-    border-top: 1px solid var(--border);
+    gap: 60px;
   }
 
   .stat {
-    text-align: center;
+    text-align: left;
   }
 
   .stat-number {
     font-size: 2.5rem;
     font-weight: 900;
     letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #007AFF, #5856D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .stat-label {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     margin-top: 4px;
+    font-weight: 600;
   }
 
-  .hero-visual {
-    position: absolute;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%);
-    display: grid;
-    gap: 24px;
-    z-index: 1;
+  /* Feature Cards */
+  .hero-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 320px;
   }
 
-  .floating-card {
-    background: var(--surface);
+  .feature-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-    min-width: 200px;
-    box-shadow: 0 8px 32px rgba(0, 122, 255, 0.1);
     transition: all 0.3s ease;
   }
 
-  .floating-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(0, 122, 255, 0.2);
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(-8px);
+    box-shadow: 0 8px 32px rgba(0, 122, 255, 0.15);
   }
 
-  .card-icon {
-    font-size: 2rem;
-    margin-bottom: 8px;
+  .feature-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
   }
 
-  .card-title {
+  .feature-content h3 {
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 4px;
+    color: #fff;
   }
 
-  .card-desc {
-    color: var(--text-secondary);
+  .feature-content p {
     font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
   }
 
   /* Services Section */
@@ -584,19 +717,52 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   }
 
   /* Responsive */
-  @media (max-width: 1024px) {
-    .hero-visual {
-      display: none;
+  @media (max-width: 1200px) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+
+    .hero-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
     }
   }
 
   @media (max-width: 768px) {
+    .hero {
+      padding: 100px 0 60px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+    }
+
     .hero-stats {
-      gap: 24px;
+      gap: 40px;
     }
 
     .stat-number {
-      font-size: 1.75rem;
+      font-size: 2rem;
+    }
+
+    .hero-features {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .hero-actions .btn {
+      width: 100%;
+      text-align: center;
     }
 
     .cta-content {
@@ -605,6 +771,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
     .tech-grid {
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-badge {
+      font-size: 0.875rem;
+      padding: 6px 16px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      gap: 24px;
     }
   }
 </style>
