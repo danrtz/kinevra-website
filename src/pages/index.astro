@@ -737,6 +737,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   @media (max-width: 768px) {
     .hero {
       padding: 100px 0 60px;
+      min-height: auto;
+    }
+
+    .hero-content {
+      text-align: center;
+    }
+
+    .hero-badge {
+      margin: 0 auto 24px;
     }
 
     .hero-title {
@@ -745,26 +754,35 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
     .hero-subtitle {
       font-size: 1.125rem;
+      margin: 0 auto 32px;
     }
 
     .hero-stats {
-      gap: 40px;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .stat {
+      text-align: center;
     }
 
     .stat-number {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
 
     .hero-features {
       grid-template-columns: 1fr;
+      margin-top: 40px;
     }
 
     .hero-actions {
       flex-direction: column;
+      align-items: center;
     }
 
     .hero-actions .btn {
       width: 100%;
+      max-width: 280px;
       text-align: center;
     }
 

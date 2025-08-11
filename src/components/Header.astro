@@ -108,34 +108,66 @@ import { COMPANY_NAME } from '../consts';
 
   .mobile-menu-toggle {
     display: none;
-    flex-direction: column;
-    gap: 4px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 0;
     z-index: 1002;
     position: relative;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobile-menu-toggle span {
+    display: block;
     width: 24px;
     height: 2px;
     background: var(--text-primary);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 2px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -12px;
+  }
+
+  .mobile-menu-toggle span:nth-child(1) {
+    margin-top: -8px;
+  }
+
+  .mobile-menu-toggle span:nth-child(2) {
+    margin-top: 0;
+  }
+
+  .mobile-menu-toggle span:nth-child(3) {
+    margin-top: 8px;
   }
 
   .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg);
+    margin-top: 0;
   }
 
   .mobile-menu-toggle.active span:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
   }
 
   .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+    transform: rotate(-45deg);
+    margin-top: 0;
+  }
+
+  @media (max-width: 480px) {
+    .logo-text {
+      font-size: 1.25rem;
+    }
+
+    .nav-container {
+      height: 60px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -147,12 +179,15 @@ import { COMPANY_NAME } from '../consts';
       bottom: 0;
       background: rgba(0, 0, 0, 0.98);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       flex-direction: column;
       justify-content: center;
-      gap: 24px;
+      align-items: center;
+      gap: 32px;
       transform: translateX(100%);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1001;
+      padding: 80px 20px 40px;
     }
 
     .nav-links.active {
@@ -160,16 +195,27 @@ import { COMPANY_NAME } from '../consts';
     }
 
     .nav-links :global(a) {
-      font-size: 1.25rem;
-      padding: 12px 24px;
-      width: 80%;
-      max-width: 300px;
+      font-size: 1.5rem;
+      padding: 16px 32px;
+      width: 100%;
+      max-width: 280px;
       text-align: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links :global(a:hover),
+    .nav-links :global(a:active) {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
     }
 
     .mobile-cta {
       display: inline-block !important;
       margin-top: 20px;
+      background: var(--primary) !important;
+      border: none !important;
     }
 
     .desktop-only {
@@ -178,29 +224,64 @@ import { COMPANY_NAME } from '../consts';
 
     .mobile-menu-toggle {
       display: flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
     }
   }
 </style>
 
 <script>
   // Mobile menu toggle
-  const mobileToggle = document.getElementById('mobileToggle');
-  const navLinks = document.getElementById('navLinks');
-  
-  mobileToggle?.addEventListener('click', () => {
-    mobileToggle.classList.toggle('active');
-    navLinks?.classList.toggle('active');
-    document.body.style.overflow = navLinks?.classList.contains('active') ? 'hidden' : '';
-  });
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (mobileToggle && navLinks) {
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = mobileToggle.classList.contains('active');
+        
+        if (isActive) {
+          mobileToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.style.overflow = '';
+        } else {
+          mobileToggle.classList.add('active');
+          navLinks.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
 
-  // Close mobile menu when clicking a link
-  const links = navLinks?.querySelectorAll('a');
-  links?.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileToggle?.classList.remove('active');
-      navLinks?.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+      // Close mobile menu when clicking a link
+      const links = navLinks.querySelectorAll('a');
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mobileToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+          mobileToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    }
   });
 
   // Scroll effect
