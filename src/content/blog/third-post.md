@@ -1,16 +1,188 @@
 ---
-title: "Third post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "Jul 22 2022"
-heroImage: "/blog-placeholder-2.jpg"
+title: 'Building Modern Applications with SAP CAP'
+description: 'A comprehensive guide to developing enterprise applications using the SAP Cloud Application Programming Model'
+pubDate: 'Feb 15 2024'
+heroImage: '/blog-placeholder-2.jpg'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+The SAP Cloud Application Programming Model (CAP) is a framework of languages, libraries, and tools for building enterprise-grade services and applications. It guides developers through proven best practices and accelerates development with pre-built solutions for common tasks.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+## Why Choose SAP CAP?
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+CAP provides a declarative approach to building business applications, allowing developers to focus on domain logic rather than technical complexities. Key benefits include:
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+- **Reduced Boilerplate**: Focus on business logic, not infrastructure code
+- **Best Practices Built-in**: Security, multitenancy, and extensibility out of the box
+- **Technology Agnostic**: Support for Node.js and Java runtimes
+- **Cloud Native**: Designed for cloud deployment from the ground up
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+## Core Concepts
+
+### Domain Modeling with CDS
+
+Core Data Services (CDS) is the backbone of CAP, providing a powerful way to define your domain model:
+
+```cds
+entity Products {
+  key ID : Integer;
+  name : String(100);
+  description : String;
+  price : Decimal(10,2);
+  stock : Integer;
+  category : Association to Categories;
+}
+
+entity Categories {
+  key ID : Integer;
+  name : String(50);
+  products : Association to many Products on products.category = $self;
+}
+```
+
+### Service Definition
+
+Services expose your domain model through RESTful APIs and OData:
+
+```cds
+service CatalogService {
+  entity Products as projection on db.Products;
+  entity Categories as projection on db.Categories;
+  
+  action replenishStock(product: Products:ID, quantity: Integer);
+}
+```
+
+## Building Your First CAP Application
+
+### Step 1: Project Setup
+
+Initialize a new CAP project:
+```bash
+cds init my-bookshop
+cd my-bookshop
+npm install
+```
+
+### Step 2: Define Your Domain Model
+
+Create your data model in `db/schema.cds`:
+```cds
+namespace my.bookshop;
+
+entity Books {
+  key ID : Integer;
+  title  : String;
+  author : Association to Authors;
+  stock  : Integer;
+}
+
+entity Authors {
+  key ID : Integer;
+  name   : String;
+  books  : Association to many Books on books.author = $self;
+}
+```
+
+### Step 3: Create Services
+
+Define services in `srv/catalog-service.cds`:
+```cds
+using my.bookshop as my from '../db/schema';
+
+service CatalogService {
+  @readonly entity Books as projection on my.Books;
+  @readonly entity Authors as projection on my.Authors;
+}
+```
+
+### Step 4: Add Business Logic
+
+Implement custom logic in `srv/catalog-service.js`:
+```javascript
+module.exports = (srv) => {
+  srv.after('READ', 'Books', (books) => {
+    books.forEach(book => {
+      if (book.stock > 100) book.title += ' -- Bestseller!'
+    })
+  })
+}
+```
+
+## Advanced Features
+
+### Authentication and Authorization
+
+CAP provides built-in support for authentication:
+
+```cds
+service CatalogService @(requires: 'authenticated-user') {
+  entity Books @(restrict: [
+    { grant: 'READ', to: 'Viewer' },
+    { grant: '*', to: 'Admin' }
+  ]) as projection on my.Books;
+}
+```
+
+### Multitenancy
+
+Enable SaaS applications with built-in multitenancy support:
+```json
+{
+  "cds": {
+    "requires": {
+      "multitenancy": true,
+      "extensibility": true
+    }
+  }
+}
+```
+
+### Draft Handling
+
+Support for draft-enabled entities:
+```cds
+service CatalogService {
+  @odata.draft.enabled
+  entity Books as projection on my.Books;
+}
+```
+
+## Deployment Options
+
+### SAP BTP Cloud Foundry
+
+Deploy to Cloud Foundry with a simple push:
+```bash
+cf push
+```
+
+### Kyma Runtime
+
+Deploy as microservices on Kubernetes:
+```bash
+cds build --production
+pack build myapp --builder paketobuildpacks/builder:base
+```
+
+## Best Practices
+
+1. **Use CDS for Everything**: Leverage CDS for data models, service definitions, and UI annotations
+2. **Follow Domain-Driven Design**: Structure your application around business domains
+3. **Implement Proper Error Handling**: Use CAP's error classes for consistent error responses
+4. **Write Tests Early**: Use CAP's testing utilities for unit and integration tests
+5. **Monitor Performance**: Implement logging and monitoring from the start
+
+## Integration with SAP Services
+
+CAP applications integrate seamlessly with SAP services:
+
+- **SAP HANA**: Native support for HANA-specific features
+- **SAP Event Mesh**: Built-in messaging capabilities
+- **SAP Workflow**: Process automation integration
+- **SAP Document Management**: File handling services
+
+## Conclusion
+
+SAP CAP dramatically simplifies enterprise application development while ensuring best practices and enterprise-grade capabilities. Its declarative approach, combined with powerful abstractions, enables developers to build sophisticated applications with minimal effort.
+
+In our next post, we'll explore how to implement event-driven architectures using SAP Event Mesh and CAP.

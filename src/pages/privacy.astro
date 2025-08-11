@@ -1,0 +1,155 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy - Kinevra" description="Privacy policy for Kinevra SAP integration and consulting services.">
+  <section class="legal-hero">
+    <div class="container">
+      <h1 class="gradient-text">Privacy Policy</h1>
+      <p class="subtitle">Last updated: {new Date().toLocaleDateString()}</p>
+    </div>
+  </section>
+
+  <section class="legal-content">
+    <div class="container">
+      <div class="content-wrapper glass-card">
+        <h2>Introduction</h2>
+        <p>
+          At Kinevra, we take your privacy seriously. This Privacy Policy explains how we collect, use, 
+          disclose, and safeguard your information when you visit our website or use our services.
+        </p>
+
+        <h2>Information We Collect</h2>
+        <p>
+          We may collect information about you in a variety of ways. The information we may collect includes:
+        </p>
+        <ul>
+          <li>Name and contact data (email address, phone number)</li>
+          <li>Business information (company name, job title)</li>
+          <li>Technical data (IP address, browser type, operating system)</li>
+          <li>Usage data (pages visited, time spent on site)</li>
+        </ul>
+
+        <h2>How We Use Your Information</h2>
+        <p>
+          We use the information we collect in the following ways:
+        </p>
+        <ul>
+          <li>To provide and maintain our services</li>
+          <li>To respond to your inquiries and fulfill your requests</li>
+          <li>To send you technical notices and support messages</li>
+          <li>To improve our website and services</li>
+          <li>To comply with legal obligations</li>
+        </ul>
+
+        <h2>Information Sharing</h2>
+        <p>
+          We do not sell, trade, or rent your personal identification information to others. We may share 
+          generic aggregated demographic information not linked to any personal identification information 
+          with our business partners and trusted affiliates for the purposes outlined above.
+        </p>
+
+        <h2>Data Security</h2>
+        <p>
+          We use administrative, technical, and physical security measures to help protect your personal 
+          information. While we have taken reasonable steps to secure the personal information you provide 
+          to us, please be aware that despite our efforts, no security measures are perfect or impenetrable.
+        </p>
+
+        <h2>Your Rights</h2>
+        <p>
+          You have the right to:
+        </p>
+        <ul>
+          <li>Access the personal information we hold about you</li>
+          <li>Request correction of inaccurate information</li>
+          <li>Request deletion of your information</li>
+          <li>Object to our use of your information</li>
+          <li>Request restriction of processing your information</li>
+        </ul>
+
+        <h2>Contact Us</h2>
+        <p>
+          If you have questions or comments about this Privacy Policy, please contact us at:
+        </p>
+        <p class="contact-info">
+          <strong>Kinevra</strong><br>
+          Email: <a href="mailto:daniel@kinevra.com">daniel@kinevra.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal-hero {
+    padding: 160px 0 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .legal-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+  }
+
+  .legal-content {
+    padding: 40px 0 100px;
+  }
+
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px;
+  }
+
+  .content-wrapper h2 {
+    font-size: 1.75rem;
+    margin: 40px 0 20px;
+    color: var(--text-primary);
+  }
+
+  .content-wrapper h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .content-wrapper p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .content-wrapper ul {
+    margin: 20px 0;
+    padding-left: 24px;
+  }
+
+  .content-wrapper li {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+
+  .contact-info {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+
+  .contact-info a {
+    color: var(--primary);
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      padding: 32px 24px;
+    }
+  }
+</style>

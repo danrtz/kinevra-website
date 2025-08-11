@@ -1,44 +1,128 @@
-# Astro Starter Kit: Blog
+# Kinevra - SAP Integration & BTP Solutions Website
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
+A modern, visually stunning website for Kinevra, specializing in SAP integration and Business Technology Platform (BTP) services.
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+## 🚀 Features
 
-<!-- dash-content-start -->
+- **Modern Dark Theme**: Sleek black background with vibrant gradient accents
+- **Apple System Fonts**: Clean, professional typography using SF Pro Display
+- **Responsive Design**: Fully responsive across all devices
+- **Glass Morphism**: Modern glass-effect cards with backdrop blur
+- **Smooth Animations**: Engaging scroll animations and hover effects
+- **SEO Optimized**: Built with best practices for search engine optimization
+- **Fast Performance**: Static site generation for lightning-fast load times
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
+## 📄 Pages
 
-Features:
+- **Home**: Hero section with services overview, technology stack, and call-to-action
+- **About**: Company mission, values, and approach
+- **Privacy Policy**: Comprehensive privacy policy
+- **Terms of Service**: Detailed terms and conditions
+- **Blog**: SAP/BTP focused technical articles
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-- ✅ Built-in Observability logging
+## 🎨 Design Elements
 
-<!-- dash-content-end -->
+- **Color Palette**:
+  - Primary: #007AFF (Apple Blue)
+  - Secondary: #5856D6 (Purple)
+  - Accent: #FF3B30 (Red)
+  - Success: #34C759 (Green)
+  - Background: Pure black with gradient overlays
 
-## Getting Started
+- **Visual Effects**:
+  - Floating blur backgrounds
+  - Gradient text effects
+  - Glass morphism cards
+  - Smooth hover transitions
+  - Animated elements on scroll
 
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
+## 🛠️ Tech Stack
+
+- **Framework**: Astro
+- **Styling**: Custom CSS with CSS Variables
+- **Deployment**: Cloudflare Pages
+- **Content**: Markdown for blog posts
+- **Build**: Vite
+
+## 📦 Installation
 
 ```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/astro-blog-starter-template
+# Clone the repository
+git clone https://github.com/yourusername/kinevra-website.git
+cd kinevra-website
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-A live public deployment of this template is available at [https://astro-blog-starter-template.templates.workers.dev](https://astro-blog-starter-template.templates.workers.dev)
+## 🚀 Deployment
 
-## 🚀 Project Structure
+### Cloudflare Pages
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+1. Push your code to GitHub
+2. Connect your GitHub repository to Cloudflare Pages
+3. Set build command: `npm run build`
+4. Set build output directory: `dist`
+5. Deploy!
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Manual Deployment
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+```bash
+# Build the project
+npm run build
 
-Any static assets, like images, can be placed in the `public/` directory.
+# Deploy using Wrangler
+npm run deploy
+```
+
+## 📧 Contact Configuration
+
+All contact forms and links redirect to: `daniel@kinevra.com`
+
+To change the contact email, update the `CONTACT_EMAIL` constant in `src/consts.ts`
+
+## 🎯 Services Offered
+
+- **SAP Integration**: API Management, Data Migration, Process Automation
+- **BTP Solutions**: Cloud Foundry Apps, Integration Suite, Analytics Cloud
+- **Consulting & Support**: Architecture Design, Best Practices, 24/7 Support
+
+## 📝 Blog Content
+
+The blog includes technical articles about:
+- Getting Started with SAP Business Technology Platform
+- SAP S/4HANA Cloud Integration Best Practices
+- Building Modern Applications with SAP CAP
+
+## 🔧 Customization
+
+### Update Company Information
+Edit `src/consts.ts` to change:
+- Site title
+- Site description
+- Company name
+- Contact email
+
+### Modify Styles
+Edit `src/styles/global.css` to customize:
+- Colors (CSS variables in `:root`)
+- Typography
+- Animations
+- Spacing
+
+### Add New Pages
+1. Create a new `.astro` file in `src/pages/`
+2. Use the `Layout` component for consistent styling
+3. Add navigation links in `src/components/Header.astro`
 
 ## 🧞 Commands
 
@@ -52,13 +136,16 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`                 | Preview your build locally, before deploying     |
 | `npm run astro ...`               | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help`         | Get help using the Astro CLI                     |
-| `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
-| `npm wrangler tail`               | View real-time logs for all Workers              |
+| `npm run deploy`                  | Deploy your production site to Cloudflare        |
 
-## 👀 Want to learn more?
+## 📄 License
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This project is proprietary and confidential.
 
-## Credit
+## 👨‍💻 Developer
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Built with ❤️ for Kinevra
+
+---
+
+For any questions or support, please contact daniel@kinevra.com
