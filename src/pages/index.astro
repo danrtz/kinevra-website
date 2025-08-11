@@ -318,7 +318,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   }
 
   .hero-content {
-    max-width: 700px;
+    max-width: 800px;
   }
 
   .hero-badge {
@@ -349,17 +349,25 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   }
 
   .hero-title {
-    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 32px;
     letter-spacing: -0.03em;
+    max-width: 100%;
   }
 
   .title-line {
     display: block;
     line-height: 1;
     padding-bottom: 0.1em;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .title-line {
+      white-space: normal;
+    }
   }
 
   /* HDR Gradient Text */
