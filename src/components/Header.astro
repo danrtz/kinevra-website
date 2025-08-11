@@ -16,11 +16,11 @@ import { COMPANY_NAME } from '../consts';
         <HeaderLink href="/about">About</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
         <HeaderLink href="/#contact">Contact</HeaderLink>
-        <a href="mailto:daniel@kinevra.com" class="btn btn-primary btn-sm mobile-cta">Email Me</a>
+        <a href="mailto:daniel@kinevra.com" class="btn btn-primary btn-sm mobile-cta">Get Started</a>
       </div>
       
       <div class="nav-cta desktop-only">
-        <a href="mailto:daniel@kinevra.com" class="btn btn-primary btn-sm">Email Me</a>
+        <a href="mailto:daniel@kinevra.com" class="btn btn-primary btn-sm">Get Started</a>
       </div>
       
       <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -38,8 +38,8 @@ import { COMPANY_NAME } from '../consts';
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.8);
+    z-index: 10001;
+    background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
@@ -64,6 +64,7 @@ import { COMPANY_NAME } from '../consts';
     align-items: center;
     text-decoration: none;
     z-index: 1002;
+    position: relative;
   }
 
   .logo-text {
@@ -108,46 +109,56 @@ import { COMPANY_NAME } from '../consts';
 
   .mobile-menu-toggle {
     display: none;
-    background: none;
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
     cursor: pointer;
     padding: 0;
-    z-index: 1002;
+    z-index: 10000;
     position: relative;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .mobile-menu-toggle.active {
+    background: rgba(255, 59, 48, 0.2);
+    border-color: rgba(255, 59, 48, 0.3);
   }
 
   .mobile-menu-toggle span {
     display: block;
-    width: 24px;
+    width: 20px;
     height: 2px;
-    background: var(--text-primary);
+    background: #ffffff;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 2px;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -12px;
+    margin-left: -10px;
   }
 
   .mobile-menu-toggle span:nth-child(1) {
-    margin-top: -8px;
+    transform: translateY(-6px);
   }
 
   .mobile-menu-toggle span:nth-child(2) {
-    margin-top: 0;
+    transform: translateY(0);
   }
 
   .mobile-menu-toggle span:nth-child(3) {
-    margin-top: 8px;
+    transform: translateY(6px);
   }
 
   .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg);
-    margin-top: 0;
+    transform: rotate(45deg) translateY(0);
   }
 
   .mobile-menu-toggle.active span:nth-child(2) {
@@ -156,8 +167,37 @@ import { COMPANY_NAME } from '../consts';
   }
 
   .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg);
-    margin-top: 0;
+    transform: rotate(-45deg) translateY(0);
+  }
+
+  /* Close button for mobile menu */
+  .mobile-close {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 1003;
+  }
+
+  .mobile-close:hover {
+    background: rgba(255, 59, 48, 0.2);
+    border-color: rgba(255, 59, 48, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .mobile-close {
+      display: flex;
+    }
   }
 
   @media (max-width: 480px) {
@@ -168,6 +208,10 @@ import { COMPANY_NAME } from '../consts';
     .nav-container {
       height: 60px;
     }
+
+    .nav-links {
+      padding: 60px 20px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -175,19 +219,24 @@ import { COMPANY_NAME } from '../consts';
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh; /* Dynamic viewport height for mobile */
+      background: rgb(0, 0, 0);
+      background: linear-gradient(180deg, 
+        rgb(0, 0, 0) 0%, 
+        rgb(20, 0, 5) 50%,
+        rgb(40, 0, 10) 100%);
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 32px;
+      gap: 24px;
       transform: translateX(100%);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1001;
-      padding: 80px 20px 40px;
+      z-index: 9999;
+      padding: 60px 20px;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .nav-links.active {
@@ -195,27 +244,35 @@ import { COMPANY_NAME } from '../consts';
     }
 
     .nav-links :global(a) {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
       padding: 16px 32px;
-      width: 100%;
-      max-width: 280px;
+      width: 90%;
+      max-width: 300px;
       text-align: center;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
 
     .nav-links :global(a:hover),
     .nav-links :global(a:active) {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       border-color: var(--primary);
+      transform: scale(1.05);
     }
 
     .mobile-cta {
       display: inline-block !important;
       margin-top: 20px;
-      background: var(--primary) !important;
+      background: linear-gradient(135deg, #007AFF, #5856D6) !important;
       border: none !important;
+      color: white !important;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
     }
 
     .desktop-only {
@@ -238,19 +295,32 @@ import { COMPANY_NAME } from '../consts';
     const mobileToggle = document.getElementById('mobileToggle');
     const navLinks = document.getElementById('navLinks');
     
+    function openMenu() {
+      mobileToggle?.classList.add('active');
+      navLinks?.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    }
+
+    function closeMenu() {
+      mobileToggle?.classList.remove('active');
+      navLinks?.classList.remove('active');
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+    
     if (mobileToggle && navLinks) {
+      // Toggle button click
       mobileToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         const isActive = mobileToggle.classList.contains('active');
         
         if (isActive) {
-          mobileToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          document.body.style.overflow = '';
+          closeMenu();
         } else {
-          mobileToggle.classList.add('active');
-          navLinks.classList.add('active');
-          document.body.style.overflow = 'hidden';
+          openMenu();
         }
       });
 
@@ -258,27 +328,14 @@ import { COMPANY_NAME } from '../consts';
       const links = navLinks.querySelectorAll('a');
       links.forEach(link => {
         link.addEventListener('click', () => {
-          mobileToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          document.body.style.overflow = '';
+          closeMenu();
         });
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
-          mobileToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          document.body.style.overflow = '';
-        }
       });
 
       // Close menu on escape key
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-          mobileToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          document.body.style.overflow = '';
+          closeMenu();
         }
       });
     }
